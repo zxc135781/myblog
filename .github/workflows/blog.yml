@@ -26,7 +26,7 @@ jobs:
           git clone --depth=1 $THEME_REPO /home/runner/work/myblog/myblog/themes/$THEME_NAME
           
       # 获取 repo 内文件
-      - uses: actions/checkout@v2
+      - uses: actions/checkout
       # 使用预编译的 Hugo 二进制文件
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v0.57.2
