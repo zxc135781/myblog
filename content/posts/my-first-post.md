@@ -5,8 +5,11 @@ tags: [ "Java", "类", "方法","Math" ]
 ---
 
 ## Java Math类
+
 ### Java BigInteger常用方法
-```
+
+```java
+
 BigInteger abs()  返回大整数的绝对值
 BigInteger add(BigInteger val) 返回两个大整数的和
 BigInteger and(BigInteger val)  返回两个大整数的按位与的结果
