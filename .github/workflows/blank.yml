@@ -1,4 +1,5 @@
-name: blank
+  
+name: blog
 
 on: [push]
 
@@ -7,7 +8,7 @@ env:
   # config.toml 里 theme 的值
   THEME_NAME: zozo
   # 主题的 github 链接
-  THEME_REPO: https://github.com/varkai/hugo-theme-zozo.git
+  THEME_REPO: https://github.com/zxc135781/hugo-theme-zozo.git
   # github username
   USER_NAME: zxc135781
   # github email
@@ -24,7 +25,7 @@ jobs:
       - uses: actions/checkout@v2
       # 使用预编译的 Hugo 二进制文件
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v0.57.2
+        uses: peaceiris/actions-hugo@v2.2.2
         with:
           hugo-version: "latest"
           extended: true
