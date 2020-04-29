@@ -20,6 +20,11 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
+      # 获取主题
+      - name: get theme
+        run: |
+          git clone --depth=1 $THEME_REPO $HOME/blog/themes/$THEME_NAME
+          
       # 获取 repo 内文件
       - uses: actions/checkout@v2
       # 使用预编译的 Hugo 二进制文件
@@ -33,10 +38,7 @@ jobs:
       - name: new site
         run: |
           hugo new site $HOME/blog
-      # 获取主题
-      - name: get theme
-        run: |
-          git clone --depth=1 $THEME_REPO $HOME/blog/themes/$THEME_NAME
+
       # 获取 $user.github.io 以保持 commit 记录
       - name: get username.github.io
         run: |
