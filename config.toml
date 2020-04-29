@@ -19,7 +19,7 @@ disqusShortname = ""                 # your discuss shortname
 [[menu.main]]                        # config your menu  # 配置菜单
   name = "首页"
   weight = 10
-  identifier = "home"
+  identifier = "posts"
   url = "/"
 [[menu.main]]
   name = "归档"
