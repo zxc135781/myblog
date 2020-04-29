@@ -1,7 +1,6 @@
 ---
 title: "Java 方法总结"
 date: 2019-05-13T19:19:58+08:00
-draft: true
 tags: [ "Java", "类", "方法","Math" ]
 ---
 
