@@ -51,7 +51,7 @@ jobs:
       - name: build
         run: |
           cd $HOME/blog
-          HUGO_ENV=production hugo -D
+          HUGO_ENV=production hugo --theme=zozo --baseUrl="https://ihux.cn/"
       # 将生成出的站点推向 user.github.io
       # 由于使用了 actions/checkout@v2，所以不再需要设置 github token
       - name: publish
