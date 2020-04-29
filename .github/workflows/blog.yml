@@ -1,23 +1,65 @@
-name: Main workflow
+  
+name: blog
 
-on:
-  push:
-    branches:
-    - master
+on: [push]
+
+# 各种信息在此处设置
+env:
+  # config.toml 里 theme 的值
+  THEME_NAME: zozo
+  # 主题的 github 链接
+  THEME_REPO: https://github.com/zxc135781/hugo-theme-zozo.git
+  # github username
+  USER_NAME: zxc135781
+  # github email
+  EMAIL: 827169070@qq.com
+  # GitHub token
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
 jobs:
-  build-deploy:
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - name: build
-      uses: peaceiris/actions-hugo@v0.57.2
-      with:
-        args: --gc --minify --cleanDestinationDir
-    - name: deploy
-      uses: peaceiris/actions-gh-pages@v1.1.0
-      if: contains(github.ref, 'master')
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        PUBLISH_BRANCH: gh-pages
-        PUBLISH_DIR: ./public
+      # 获取 repo 内文件
+      - uses: actions/checkout@v2
+      # 使用预编译的 Hugo 二进制文件
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2.2.2
+        with:
+          hugo-version: "latest"
+          extended: true
+
+      # 新建站点
+      - name: new site
+        run: |
+          hugo new site $HOME/blog
+      # 获取主题
+      - name: get theme
+        run: |
+          git clone --depth=1 $THEME_REPO $HOME/blog/themes/$THEME_NAME
+      # 获取 $user.github.io 以保持 commit 记录
+      - name: get username.github.io
+        run: |
+          git clone --no-checkout https://github.com/$USER_NAME/TEST-BLOG.git $HOME/blog/public
+      # 将内容文件复制进入站点内
+      - name: copy in
+        run: |
+          rm -rf $HOME/blog/config.toml $HOME/blog/content/
+          /bin/cp -rf config.toml $HOME/blog/config.toml
+          /bin/cp -rf content/ $HOME/blog/content/
+      # build
+      - name: build
+        run: |
+          cd $HOME/blog
+          HUGO_ENV=production hugo --theme=zozo --baseUrl="https://ihux.cn/"
+      # 将生成出的站点推向 user.github.io
+      # 由于使用了 actions/checkout@v2，所以不再需要设置 github token
+      - name: publish
+        run: |
+          git config --global user.name $USER_NAME
+          git config --global user.email $EMAIL
+          cd $HOME/blog/public
+          git add .
+          git commit -m "Auto Update: `date +'%Y-%m-%d %H:%M:%S'`"
+          git push "https://$USER:$GH_TOKEN@github.com/$USER_NAME/TEST-BLOG.git" master:master
