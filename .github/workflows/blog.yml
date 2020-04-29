@@ -23,7 +23,7 @@ jobs:
       # 获取主题
       - name: get theme
         run: |
-          git clone --depth=1 $THEME_REPO /github/workspace/themes/$THEME_NAME
+          git clone --depth=1 $THEME_REPO /home/runner/work/myblog/myblog/themes/$THEME_NAME
           
       # 获取 repo 内文件
       - uses: actions/checkout@v2
