@@ -48,6 +48,7 @@ jobs:
           rm -rf $HOME/blog/config.toml $HOME/blog/content/
           /bin/cp -rf config.toml $HOME/blog/config.toml
           /bin/cp -rf content/ $HOME/blog/content/
+          /bin/cp -rf CNAME/ $HOME/blog/content/public
       # build
       - name: build
         run: |
