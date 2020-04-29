@@ -61,4 +61,4 @@ jobs:
           cd $HOME/blog/public
           git add .
           git commit -m "Auto Update: `date +'%Y-%m-%d %H:%M:%S'`"
-          git push "https://$USER:$GH_TOKEN@github.com/$USER_NAME/TEST-BLOG.git" master/master
+          git push "https://$USER:$GH_TOKEN@github.com/$USER_NAME/TEST-BLOG.git" master:master
